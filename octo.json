@@ -1,0 +1,8 @@
+{
+    "application": {
+        "fullscreen": false,
+        "height": 600,
+        "title": "octo",
+        "width": 800
+    }
+}
