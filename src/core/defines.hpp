@@ -5,7 +5,7 @@
 #endif
 
 #ifndef DEFAULT_CONFIG_PATH
-#define DEFAULT_CONFIG_PATH "../octo.json"
+#define DEFAULT_CONFIG_PATH "octo.json"
 #endif
 
 // #include "config.hpp"

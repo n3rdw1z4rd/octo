@@ -29,9 +29,6 @@ namespace octo
         ~Application();
 
         nlohmann::json getDefaultSettings();
-        nlohmann::json loadJsonFile(const std::string &path);
-        bool saveJsonFile(const std::string &path, nlohmann::json json);
-
         static void framebufferResizeCallback(GLFWwindow *window, int width, int height);
 
         void init();
