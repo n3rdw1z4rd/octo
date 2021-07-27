@@ -19,6 +19,18 @@ if (WIN32)
         "C:\\TDM-GCC-64\\x86_64-w64-mingw32\\lib"
         "C:\\VulkanSDK\\1.2.182.0\\Lib"
     )
+
+    target_link_libraries(${PROJECT_NAME} glfw3 vulkan-1)
+elseif (UNIX)
+    target_include_directories(${PROJECT_NAME} PUBLIC
+        "${VULKAN_SDK}/include"
+    )
+
+    target_link_directories(${PROJECT_NAME} PUBLIC
+        "${VULKAN_SDK}/lib"
+    )
+
+    target_link_libraries(${PROJECT_NAME} glfw vulkan)
 endif()
 
-target_link_libraries(${PROJECT_NAME} glfw3 vulkan-1)
+
