@@ -26,7 +26,8 @@ namespace octo
         fullscreen = settings["application"]["fullscreen"].get<bool>();
     }
 
-    Application::~Application() {
+    Application::~Application()
+    {
         glfwDestroyWindow(window);
         glfwTerminate();
     }
@@ -34,13 +35,7 @@ namespace octo
     nlohmann::json Application::getDefaultSettings()
     {
         nlohmann::json defaultSettings = {
-            {"application", {
-                {"title", PROJECT_NAME},
-                {"fullscreen", false},
-                {"width", 800},
-                {"height", 600}
-            }}
-        };
+            {"application", {{"title", PROJECT_NAME}, {"fullscreen", false}, {"width", 800}, {"height", 600}}}};
 
         return defaultSettings;
     }
@@ -53,7 +48,8 @@ namespace octo
         _window->height = height;
     }
 
-    void Application::init() {
+    void Application::init()
+    {
         glfwInit();
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
@@ -73,13 +69,16 @@ namespace octo
         spdlog::debug("Application: supported extension count: {}", extensionCount);
     }
 
-    void Application::start() {
-        while(!glfwWindowShouldClose(window)) {
+    void Application::start()
+    {
+        while (!glfwWindowShouldClose(window))
+        {
             glfwPollEvents();
         }
     }
 
-    void Application::stop() {
+    void Application::stop()
+    {
         glfwSetWindowShouldClose(window, 1);
     }
 }

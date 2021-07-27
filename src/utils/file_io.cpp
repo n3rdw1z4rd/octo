@@ -3,7 +3,8 @@
 #include <spdlog/spdlog.h>
 #include <fstream>
 
-namespace octo {
+namespace octo
+{
     nlohmann::json loadJsonFile(const std::string &path)
     {
         std::ifstream file(path.c_str());
