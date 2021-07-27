@@ -20,8 +20,9 @@ int main(int argc, char **argv)
 
     try
     {
-        app.init();
-        app.start();
+        if (app.init()) {
+            app.start();
+        }
     }
     catch (const std::exception &e)
     {

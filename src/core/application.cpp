@@ -28,6 +28,8 @@ namespace octo
 
     Application::~Application()
     {
+        renderer.destroy();
+
         glfwDestroyWindow(window);
         glfwTerminate();
     }
@@ -48,9 +50,12 @@ namespace octo
         _window->height = height;
     }
 
-    void Application::init()
+    bool Application::init()
     {
-        glfwInit();
+        glfwSetErrorCallback(glfwErrorCallback);
+
+        if (!glfwInit()) return false;
+
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
@@ -64,9 +69,12 @@ namespace octo
         glfwSetWindowUserPointer(window, this);
         glfwSetFramebufferSizeCallback(window, framebufferResizeCallback);
 
-        uint32_t extensionCount = 0;
-        vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
-        spdlog::debug("Application: supported extension count: {}", extensionCount);
+        if (!glfwVulkanSupported()) {
+            spdlog::warn("Application: Vulkan is not supported");
+            return false;
+        }
+
+        return renderer.init(window, width, height);
     }
 
     void Application::start()

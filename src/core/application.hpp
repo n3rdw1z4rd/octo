@@ -1,14 +1,18 @@
 #pragma once
 
 #include "defines.hpp"
+#include "renderer.hpp"
 #include "../input/input.hpp"
-
 #include "../third_party/json.hpp"
 
-#define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
-
+#include <spdlog/spdlog.h>
 #include <string>
+
+static void glfwErrorCallback(int error, const char *description)
+{
+    spdlog::error("Application: GLFW Error {}: {}", error, description);
+}
 
 namespace octo
 {
@@ -20,7 +24,8 @@ namespace octo
         bool framebufferResized = false;
 
         GLFWwindow *window;
-        Input *input;
+        Renderer renderer{};
+        // Input input{};
 
     public:
         nlohmann::json settings;
@@ -31,7 +36,7 @@ namespace octo
         nlohmann::json getDefaultSettings();
         static void framebufferResizeCallback(GLFWwindow *window, int width, int height);
 
-        void init();
+        bool init();
         void start();
         void stop();
     };
