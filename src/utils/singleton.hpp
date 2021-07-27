@@ -31,5 +31,5 @@ namespace octo
     };
 
     template <class T>
-    T *Singleton<T>::_instance = NULL;
+    T *Singleton<T>::_instance = nullptr;
 }
