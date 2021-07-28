@@ -222,10 +222,5 @@ namespace octo
         {
             vkDestroyInstance(instance, allocatorCallbacks);
         }
-
-        if (instance != nullptr)
-        {
-            vkDestroyInstance(instance, nullptr);
-        }
     }
 }
