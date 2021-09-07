@@ -9,11 +9,6 @@
 #include <spdlog/spdlog.h>
 #include <string>
 
-static void glfwErrorCallback(int error, const char *description)
-{
-    spdlog::error("Application: GLFW Error {}: {}", error, description);
-}
-
 namespace octo
 {
     class Application

@@ -11,13 +11,17 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 
 if (WIN32)
     target_include_directories(${PROJECT_NAME} PUBLIC
-        "C:\\TDM-GCC-64\\x86_64-w64-mingw32\\include"
-        "C:\\VulkanSDK\\1.2.182.0\\Include"
+        "$ENV{MINGW_ROOT}\\include"
+        "$ENV{VULKAN_SDK}\\Include"
+        "$ENV{SDKS_ROOT}\\glfw\\include"
+        "$ENV{SDKS_ROOT}\\glm\\glm"
+        "$ENV{SDKS_ROOT}\\spdlog\\include"
     )
 
     target_link_directories(${PROJECT_NAME} PUBLIC
-        "C:\\TDM-GCC-64\\x86_64-w64-mingw32\\lib"
-        "C:\\VulkanSDK\\1.2.182.0\\Lib"
+        "$ENV{MINGW_ROOT}\\lib"
+        "$ENV{VULKAN_SDK}\\Lib"
+        "$ENV{SDKS_ROOT}\\glfw\\lib-mingw-w64"
     )
 
     target_link_libraries(${PROJECT_NAME} glfw3 vulkan-1)

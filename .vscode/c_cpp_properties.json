@@ -3,9 +3,11 @@
         {
             "name": "Win32",
             "includePath": [
-                "C:\\TDM-GCC-64\\x86_64-w64-mingw32\\include",
+                "${MINGW_ROOT}\\include",
                 "${VULKAN_SDK}\\Include",
-                "${USERPROFILE}\\dev\\libs\\include",
+                "${SDKS_ROOT}\\glfw\\include",
+                "${SDKS_ROOT}\\glm\\glm",
+                "${SDKS_ROOT}\\spdlog\\include",
                 "${workspaceFolder}\\**"
             ],
             "defines": [
@@ -14,7 +16,7 @@
                 "_UNICODE"
             ],
             "windowsSdkVersion": "10.0.19041.0",
-            "compilerPath": "C:\\TDM-GCC-64\\bin\\g++.exe",
+            "compilerPath": "${TDM_GCC_ROOT}\\bin\\g++.exe",
             "cStandard": "c17",
             "cppStandard": "c++17",
             "intelliSenseMode": "gcc-x64"
@@ -23,7 +25,6 @@
             "name": "Linux",
             "includePath": [
                 "${VULKAN_SDK}/include",
-                "${HOME}/dev/libs/include",
                 "${workspaceFolder}/**"
             ],
             "defines": [

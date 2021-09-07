@@ -4,6 +4,11 @@
 #include <spdlog/spdlog.h>
 #include <fstream>
 
+static void glfwErrorCallback(int error, const char *description)
+{
+    spdlog::error("Application: GLFW Error {}: {}", error, description);
+}
+
 namespace octo
 {
     Application::Application(int argc, char **argv)
