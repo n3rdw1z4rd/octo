@@ -24,7 +24,6 @@
         {
             "name": "Linux",
             "includePath": [
-                "${VULKAN_SDK}/include",
                 "${workspaceFolder}/**"
             ],
             "defines": [
