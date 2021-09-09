@@ -1,5 +1,7 @@
 #include "application.hpp"
 
+#include <fstream>
+
 static struct application_state {
     GLFWwindow* window;
     bool is_running = false;

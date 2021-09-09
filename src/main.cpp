@@ -30,6 +30,14 @@ int main(int argc, char** argv) {
         return -1;
     }
 
+    if (!renderer_create_render_pass()) {
+        return -1;
+    }
+
+    if (!renderer_create_graphics_pipeline()) {
+        return -1;
+    }
+
     application_start_main_loop();
 
     renderer_shutdown();

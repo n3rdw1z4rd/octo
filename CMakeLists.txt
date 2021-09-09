@@ -19,9 +19,9 @@ if (WIN32)
         "$ENV{SDKS_ROOT}\\glfw\\lib-mingw-w64"
     )
 
-    target_link_libraries(${PROJECT_NAME} glfw3 vulkan-1)
+    target_link_libraries(${PROJECT_NAME} glfw3 vulkan-1 shaderc_shared)
 elseif (UNIX)
-    target_link_libraries(${PROJECT_NAME} glfw vulkan)
+    target_link_libraries(${PROJECT_NAME} glfw vulkan shaderc)
 endif()
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
