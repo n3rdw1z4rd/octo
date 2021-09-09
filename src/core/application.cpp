@@ -43,7 +43,7 @@ bool application_create_window(application_config app_config) {
         state.window = glfwCreateWindow(
             app_config.window_width,
             app_config.window_height,
-            app_config.window_title,
+            app_config.window_title.c_str(),
             nullptr, nullptr
         );
 
