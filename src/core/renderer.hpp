@@ -55,6 +55,8 @@ bool renderer_create_device();
 bool renderer_create_swap_chain();
 bool renderer_create_render_pass();
 bool renderer_create_graphics_pipeline();
+bool renderer_create_command_pool();
+bool renderer_create_framebuffers();
 
 void renderer_shutdown();
 std::string get_vkresult_string(VkResult value);

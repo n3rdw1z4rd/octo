@@ -38,6 +38,14 @@ int main(int argc, char** argv) {
         return -1;
     }
 
+    if (!renderer_create_command_pool()) {
+        return -1;
+    }
+
+    if (!renderer_create_framebuffers()) {
+        return -1;
+    }
+
     application_start_main_loop();
 
     renderer_shutdown();
