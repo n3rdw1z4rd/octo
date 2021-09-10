@@ -16,8 +16,6 @@ int main(int argc, char** argv) {
         app.run([&renderer](bool resized) {
             renderer.render(resized);
         });
-
-        // renderer.cleanup();
     }
 
     return 0;

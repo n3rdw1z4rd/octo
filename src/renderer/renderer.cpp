@@ -62,7 +62,9 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL _debugCallback(
 
 Renderer::Renderer() {}
 
-Renderer::~Renderer() {}
+Renderer::~Renderer() {
+    cleanup();
+}
 
 // public methods:
 bool Renderer::initialize(const std::string name, GLFWwindow* handle) {
@@ -111,6 +113,8 @@ void Renderer::render(bool resized) {
 }
 
 void Renderer::cleanup() {
+    vkDeviceWaitIdle(device);
+
     _cleanupSwapChain();
 
     LogDebug("Renderer::cleanup");
@@ -320,8 +324,8 @@ bool Renderer::_isDeviceSuitable(VkPhysicalDevice device) {
     QueueFamilyIndices indices = _findQueueFamilies(device);
 
     bool extensionsSupported = _checkDeviceExtensionSupport(device);
-
     bool swapChainAdequate = false;
+
     if (extensionsSupported) {
         SwapChainSupportDetails swapChainSupport = _querySwapChainSupport(device);
         swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
@@ -675,7 +679,7 @@ void Renderer::_createGraphicsPipeline() {
     LogDebug("Renderer::_createGraphicsPipeline");
 
     LogDebug("Renderer::_createGraphicsPipeline: compiling shaders...");
-    
+
     LogDebug("    BASE_VERT_SHADER...");
     auto vertShaderCode = compileShaderSource("BASE_VERT_SHADER", BASE_VERT_SHADER, shaderc_glsl_default_vertex_shader);
     VkShaderModule vertShaderModule = _createShaderModule(vertShaderCode);
