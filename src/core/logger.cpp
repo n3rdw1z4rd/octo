@@ -6,7 +6,7 @@
 #include <sstream>
 #include <string>
 
-std::string get_now_time() {
+std::string GetNowTime() {
     auto now = std::chrono::system_clock::now();
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
     auto timer = std::chrono::system_clock::to_time_t(now);

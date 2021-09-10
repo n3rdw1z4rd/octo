@@ -12,6 +12,7 @@ if (WIN32)
         $ENV{USERPROFILE}/dev/sdks/vulkan/1.2.189.0/Include
         $ENV{USERPROFILE}/dev/sdks/glfw/include
         $ENV{USERPROFILE}/dev/sdks/glm/glm
+        ${PROJECT_SOURCE_DIR}/src
     )
 
     target_link_directories(${PROJECT_NAME} PUBLIC
@@ -22,5 +23,9 @@ if (WIN32)
 
     target_link_libraries(${PROJECT_NAME} glfw3 vulkan-1 shaderc_shared)
 elseif (UNIX)
+    target_include_directories(${PROJECT_NAME} PUBLIC
+        ${PROJECT_SOURCE_DIR}/src
+    )
+
     target_link_libraries(${PROJECT_NAME} glfw vulkan shaderc_shared)
 endif()

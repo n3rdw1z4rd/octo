@@ -1,7 +1,5 @@
 #pragma once
 
-#include "defines.hpp"
-
 #include <sstream>
 #include <iostream>
 
@@ -17,10 +15,10 @@ static bool win_console_initialized = false;
 #define CYAN "\033[36m"
 #define RESET "\033[0;0m"
 
-std::string get_now_time();
+std::string GetNowTime();
 
 template<typename ... Args>
-void _log(const char* level_color, const char* level_string, const Args&... args) {
+void LogMessage(const char* level_color, const char* level_string, const Args&... args) {
 
 #if defined WIN32 || defined __MINGW32__
     if (!win_console_initialized) {
@@ -40,10 +38,10 @@ void _log(const char* level_color, const char* level_string, const Args&... args
 
     std::stringstream ss;
 
-    ss << CYAN << get_now_time() << RESET << ' ';
-    ss << level_color << level_string << ' ';
+    ss << CYAN << GetNowTime() << RESET;
+    ss << ' ' << level_color << level_string;
 
-    ((ss << args), ...);
+    ((ss << ' ' << args), ...);
 
     ss << RESET;
 
@@ -51,23 +49,23 @@ void _log(const char* level_color, const char* level_string, const Args&... args
 }
 
 template<typename ... Args>
-void log_error(const Args&... args) {
-    _log(RED, "ERROR", args...);
+void LogError(const Args&... args) {
+    LogMessage(RED, "ERROR", args...);
 }
 
 template<typename ... Args>
-void log_warn(const Args&... args) {
-    _log(YELLOW, " WARN", args...);
+void LogWarn(const Args&... args) {
+    LogMessage(YELLOW, " WARN", args...);
 }
 
 template<typename ... Args>
-void log_info(const Args&... args) {
-    _log(WHITE, " INFO", args...);
+void LogInfo(const Args&... args) {
+    LogMessage(WHITE, " INFO", args...);
 }
 
 template<typename ... Args>
-void log_debug(const Args&... args) {
+void LogDebug(const Args&... args) {
 #ifndef NDEBUG
-    _log(GREY, "DEBUG", args...);
+    LogMessage(GREY, "DEBUG", args...);
 #endif
 }
