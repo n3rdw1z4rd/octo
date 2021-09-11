@@ -7,7 +7,7 @@
                 "${VULKAN_SDK}\\Include",
                 "${SDKS_ROOT}\\glfw\\include",
                 "${SDKS_ROOT}\\glm\\glm",
-                "${SDKS_ROOT}\\spdlog\\include",
+                "${SDKS_ROOT}\\entt\\src",
                 "${workspaceFolder}\\src\\**"
             ],
             "defines": [

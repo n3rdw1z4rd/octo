@@ -12,6 +12,7 @@ if (WIN32)
         $ENV{USERPROFILE}/dev/sdks/vulkan/1.2.189.0/Include
         $ENV{USERPROFILE}/dev/sdks/glfw/include
         $ENV{USERPROFILE}/dev/sdks/glm/glm
+        $ENV{USERPROFILE}/dev/sdks/entt/src
         ${PROJECT_SOURCE_DIR}/src
     )
 
