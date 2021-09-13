@@ -5,26 +5,12 @@
 #include <chrono>
 
 namespace octo {
-    Window::Window() {}
+    Window::Window(ApplicationDesc* appDesc) {
+        LogDebug("Window: initializing...");
 
-    Window::~Window() {
-        LogDebug("Window::~Window");
-
-        glfwDestroyWindow(_windowHandle);
-        glfwTerminate();
-    }
-
-    bool Window::create(WindowInfo* wInfo) {
-        LogDebug("Window::create:", wInfo->toString());
-
-        if (_windowCreated) {
-            LogWarn("Window::create: window already exists");
-            return true;
-        }
-
-        _title = wInfo->name;
-        _width = wInfo->width;
-        _height = wInfo->height;
+        _title = appDesc->name;
+        _width = appDesc->width;
+        _height = appDesc->height;
 
         glfwInit();
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -32,11 +18,10 @@ namespace octo {
         _windowHandle = glfwCreateWindow(_width, _height, _title.c_str(), nullptr, nullptr);
 
         if (!_windowHandle) {
-            LogError("Window::create: failed to create window");
-            return false;
+            throw std::runtime_error("Window: failed to create window");
         }
 
-        wInfo->windowHandle = _windowHandle;
+        appDesc->windowHandle = _windowHandle;
 
         glfwSetWindowUserPointer(_windowHandle, this);
 
@@ -45,9 +30,13 @@ namespace octo {
         glfwSetScrollCallback(_windowHandle, &Window::_mouseWheelCallback);
         glfwSetCursorPosCallback(_windowHandle, &Window::_mousePositionCallback);
         glfwSetFramebufferSizeCallback(_windowHandle, &Window::_resizeCallback);
+    }
 
-        _windowCreated = true;
-        return _windowCreated;
+    Window::~Window() {
+        LogDebug("Window::~Window");
+
+        glfwDestroyWindow(_windowHandle);
+        glfwTerminate();
     }
 
     bool Window::pollEvents() {

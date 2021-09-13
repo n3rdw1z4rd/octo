@@ -1,6 +1,7 @@
 #pragma once
 
 #include "window.hpp"
+#include "application_desc.hpp"
 #include "vertex.hpp"
 
 #include <GLFW/glfw3.h>
@@ -37,10 +38,8 @@ namespace octo {
 
     class Renderer {
     public:
-        Renderer();
+        Renderer(ApplicationDesc*);
         ~Renderer();
-
-        bool create(WindowInfo*);
 
         void render();
         void resize();
@@ -58,7 +57,6 @@ namespace octo {
     protected:
 
     private:
-        bool _initialized = false;
         bool _framebufferResized = false;
 
         std::string _applicationName;

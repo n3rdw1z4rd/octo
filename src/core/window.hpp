@@ -1,9 +1,9 @@
 #pragma once
 
 #include "defines.hpp"
+#include "application_desc.hpp"
 
 #include <GLFW/glfw3.h>
-#include <sstream>
 #include <string>
 #include <memory>
 #include <functional>
@@ -11,28 +11,6 @@
 #include <map>
 
 namespace octo {
-    struct WindowInfo {
-        std::string name = "octo";
-        uint32_t width = 1280;
-        uint32_t height = 720;
-        bool fullscreen = false;
-        GLFWwindow* windowHandle;
-
-        std::string toString() {
-            std::stringstream ss;
-
-            ss << "{ ";
-            ss << "name: " << name;
-            ss << ", width: " << width;
-            ss << ", height: " << height;
-            ss << ", fullscreen: " << fullscreen ? "true" : "false";
-            ss << ", windowHandle: " << windowHandle;
-            ss << " }";
-
-            return ss.str();
-        }
-    };
-
     struct MousePosition {
         int x;
         int y;
@@ -55,11 +33,9 @@ namespace octo {
 
     class Window {
     public:
-        Window();
+        Window(ApplicationDesc*);
         ~Window();
 
-        bool create(WindowInfo*);
-        GLFWwindow* getWindow() { return _windowHandle; }
         bool pollEvents();
         void shutdown();
         long long getTimestamp();
@@ -81,8 +57,6 @@ namespace octo {
         static void _mouseWheelCallback(GLFWwindow* window, double xoffset, double yoffset);
         static void _mousePositionCallback(GLFWwindow* window, double xpos, double ypos);
         static void _resizeCallback(GLFWwindow* window, int width, int height);
-
-        bool _windowCreated = false;
 
         std::string _title;
         uint32_t _width;

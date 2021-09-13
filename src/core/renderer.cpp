@@ -61,28 +61,15 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL _debugCallback(
 }
 
 namespace octo {
-    Renderer::Renderer() {}
-
-    Renderer::~Renderer() {
-        cleanup();
-    }
-
-    // public methods:
-    bool Renderer::create(WindowInfo* wInfo) {
-        LogDebug("Renderer::create:", wInfo->toString());
-
-        if (_initialized) {
-            LogWarn("Renderer::create: already created");
-            return true;
-        }
+    Renderer::Renderer(ApplicationDesc* appDesc) {
+        LogDebug("Renderer: initializing...");
 
         if (!_windowHandle) {
-            LogError("Renderer::create: must supply a valid windowHandle (GLFWwindow*)");
-            return false;
+            throw std::runtime_error("Renderer: missing WindowInfo.windowHandle");
         }
 
-        _applicationName = wInfo->name;
-        _windowHandle = wInfo->windowHandle;
+        _applicationName = appDesc->name;
+        _windowHandle = appDesc->windowHandle;
 
         _createInstance();
         _setupDebugMessenger();
@@ -98,17 +85,14 @@ namespace octo {
         _createVertexBuffer();
         _createCommandBuffers();
         _createSyncObjects();
-
-        _initialized = true;
-        return true;
     }
 
-    void Renderer::render() {
-        if (!_initialized) {
-            LogError("Renderer::render: not created");
-            return;
-        }
+    Renderer::~Renderer() {
+        cleanup();
+    }
 
+    // public methods:
+    void Renderer::render() {
         _drawFrame();
         // render scene graph
     }
