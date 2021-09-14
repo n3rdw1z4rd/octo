@@ -1,7 +1,7 @@
 #pragma once
 
 #include "window.hpp"
-#include "application_desc.hpp"
+#include "context.hpp"
 #include "vertex.hpp"
 
 #include <GLFW/glfw3.h>
@@ -38,7 +38,7 @@ namespace octo {
 
     class Renderer {
     public:
-        Renderer(ApplicationDesc*);
+        Renderer(Context*);
         ~Renderer();
 
         void render();
@@ -59,8 +59,9 @@ namespace octo {
     private:
         bool _framebufferResized = false;
 
-        std::string _applicationName;
-        GLFWwindow* _windowHandle;
+        // std::string _applicationName;
+        // GLFWwindow* _windowHandle;
+        Context* _context;
 
         VkInstance _instance;
         VkDebugUtilsMessengerEXT _debugMessenger;

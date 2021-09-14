@@ -1,7 +1,7 @@
 #pragma once
 
 #include "defines.hpp"
-#include "application_desc.hpp"
+#include "context.hpp"
 
 #include <GLFW/glfw3.h>
 #include <string>
@@ -33,7 +33,7 @@ namespace octo {
 
     class Window {
     public:
-        Window(ApplicationDesc*);
+        Window(Context*);
         ~Window();
 
         bool pollEvents();
@@ -58,13 +58,7 @@ namespace octo {
         static void _mousePositionCallback(GLFWwindow* window, double xpos, double ypos);
         static void _resizeCallback(GLFWwindow* window, int width, int height);
 
-        std::string _title;
-        uint32_t _width;
-        uint32_t _height;
-
-        GLFWwindow* _windowHandle;
-
-        int _downTimeThreshold = 250;
+        Context* _context;
 
         KeyboardState _keyboardState;
         std::list<std::function<void(int key, int scancode, int action, int mods)>> _keyboardEventListeners;

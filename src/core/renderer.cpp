@@ -61,15 +61,14 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL _debugCallback(
 }
 
 namespace octo {
-    Renderer::Renderer(ApplicationDesc* appDesc) {
+    Renderer::Renderer(Context* context) {
         LogDebug("Renderer: initializing...");
 
-        if (!_windowHandle) {
+        if (!context->windowHandle) {
             throw std::runtime_error("Renderer: missing WindowInfo.windowHandle");
         }
 
-        _applicationName = appDesc->name;
-        _windowHandle = appDesc->windowHandle;
+        _context = context;
 
         _createInstance();
         _setupDebugMessenger();
@@ -362,7 +361,7 @@ namespace octo {
             return capabilities.currentExtent;
         } else {
             int width, height;
-            glfwGetFramebufferSize(_windowHandle, &width, &height);
+            glfwGetFramebufferSize(_context->windowHandle, &width, &height);
 
             VkExtent2D actualExtent = {
                 static_cast<uint32_t>(width),
@@ -396,10 +395,10 @@ namespace octo {
         LogDebug("Renderer::_recreateSwapChain");
 
         int width = 0, height = 0;
-        glfwGetFramebufferSize(_windowHandle, &width, &height);
+        glfwGetFramebufferSize(_context->windowHandle, &width, &height);
 
         while (width == 0 || height == 0) {
-            glfwGetFramebufferSize(_windowHandle, &width, &height);
+            glfwGetFramebufferSize(_context->windowHandle, &width, &height);
             glfwWaitEvents();
         }
 
@@ -475,7 +474,7 @@ namespace octo {
 
         VkApplicationInfo appInfo{};
         appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-        appInfo.pApplicationName = _applicationName.c_str();
+        appInfo.pApplicationName = _context->name.c_str();
         appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
         appInfo.pEngineName = "octo";
         appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
@@ -521,7 +520,7 @@ namespace octo {
     void Renderer::_createSurface() {
         LogDebug("Renderer::_createSurface");
 
-        if (glfwCreateWindowSurface(_instance, _windowHandle, nullptr, &_surface) != VK_SUCCESS) {
+        if (glfwCreateWindowSurface(_instance, _context->windowHandle, nullptr, &_surface) != VK_SUCCESS) {
             throw std::runtime_error("Renderer::_createSurface: failed to create window surface");
         }
     }
@@ -724,13 +723,11 @@ namespace octo {
     void Renderer::_createGraphicsPipeline() {
         LogDebug("Renderer::_createGraphicsPipeline");
 
-        LogDebug("Renderer::_createGraphicsPipeline: compiling shaders:");
-
-        LogDebug("    BASE_VERT_SHADER");
+        LogDebug("Renderer::_createGraphicsPipeline: compiling shader: BASE_VERT_SHADER");
         auto vertShaderCode = CompileShaderSource("BASE_VERT_SHADER", BASE_VERT_SHADER, shaderc_glsl_default_vertex_shader);
         VkShaderModule vertShaderModule = _createShaderModule(vertShaderCode);
 
-        LogDebug("    BASE_FRAG_SHADER");
+        LogDebug("Renderer::_createGraphicsPipeline: compiling shader: BASE_FRAG_SHADER");
         auto fragShaderCode = CompileShaderSource("BASE_FRAG_SHADER", BASE_FRAG_SHADER, shaderc_glsl_default_fragment_shader);
         VkShaderModule fragShaderModule = _createShaderModule(fragShaderCode);
 

@@ -5,44 +5,40 @@
 #include <chrono>
 
 namespace octo {
-    Window::Window(ApplicationDesc* appDesc) {
+    Window::Window(Context* context) {
         LogDebug("Window: initializing...");
-
-        _title = appDesc->name;
-        _width = appDesc->width;
-        _height = appDesc->height;
 
         glfwInit();
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
-        _windowHandle = glfwCreateWindow(_width, _height, _title.c_str(), nullptr, nullptr);
+        _context = context;
 
-        if (!_windowHandle) {
+        _context->windowHandle = glfwCreateWindow(_context->width, _context->height, _context->name.c_str(), nullptr, nullptr);
+
+        if (!_context->windowHandle) {
             throw std::runtime_error("Window: failed to create window");
         }
 
-        appDesc->windowHandle = _windowHandle;
+        glfwSetWindowUserPointer(_context->windowHandle, this);
 
-        glfwSetWindowUserPointer(_windowHandle, this);
-
-        glfwSetKeyCallback(_windowHandle, &Window::_keyCallback);
-        glfwSetMouseButtonCallback(_windowHandle, &Window::_mouseButtonCallback);
-        glfwSetScrollCallback(_windowHandle, &Window::_mouseWheelCallback);
-        glfwSetCursorPosCallback(_windowHandle, &Window::_mousePositionCallback);
-        glfwSetFramebufferSizeCallback(_windowHandle, &Window::_resizeCallback);
+        glfwSetKeyCallback(_context->windowHandle, &Window::_keyCallback);
+        glfwSetMouseButtonCallback(_context->windowHandle, &Window::_mouseButtonCallback);
+        glfwSetScrollCallback(_context->windowHandle, &Window::_mouseWheelCallback);
+        glfwSetCursorPosCallback(_context->windowHandle, &Window::_mousePositionCallback);
+        glfwSetFramebufferSizeCallback(_context->windowHandle, &Window::_resizeCallback);
     }
 
     Window::~Window() {
         LogDebug("Window::~Window");
 
-        glfwDestroyWindow(_windowHandle);
+        glfwDestroyWindow(_context->windowHandle);
         glfwTerminate();
     }
 
     bool Window::pollEvents() {
-        if (_windowHandle) {
+        if (_context->windowHandle) {
             glfwPollEvents();
-            return !glfwWindowShouldClose(_windowHandle);
+            return !glfwWindowShouldClose(_context->windowHandle);
         } else {
             LogWarn("Window::pollEvents: window does not exist");
             return false;
@@ -50,7 +46,7 @@ namespace octo {
     }
 
     void Window::shutdown() {
-        glfwSetWindowShouldClose(_windowHandle, 1);
+        glfwSetWindowShouldClose(_context->windowHandle, 1);
     }
 
     long long Window::getTimestamp() {
@@ -70,7 +66,7 @@ namespace octo {
         } else {
             windowPtr->_keyboardState.keyDown[key] = false;
 
-            if (windowPtr->getTimestamp() - windowPtr->_keyboardState.keyDownTime[key] < windowPtr->_downTimeThreshold) {
+            if (windowPtr->getTimestamp() - windowPtr->_keyboardState.keyDownTime[key] < windowPtr->_context->inputDownTimeThreshold) {
                 for (auto callback : windowPtr->_keyPressedEventListeners) {
                     if (callback.first == key) {
                         callback.second(mods);
@@ -97,7 +93,7 @@ namespace octo {
         } else {
             windowPtr->_mouseState.buttonDown[button] = false;
 
-            if (windowPtr->getTimestamp() - windowPtr->_mouseState.buttonDownTime[button] < windowPtr->_downTimeThreshold) {
+            if (windowPtr->getTimestamp() - windowPtr->_mouseState.buttonDownTime[button] < windowPtr->_context->inputDownTimeThreshold) {
                 for (auto callback : windowPtr->_buttonClickedEventListeners) {
                     if (callback.first == button) {
                         callback.second(mods);
