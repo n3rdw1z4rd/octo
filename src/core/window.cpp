@@ -29,7 +29,11 @@ namespace octo {
     }
 
     Window::~Window() {
-        LogDebug("Window::~Window");
+        cleanup();
+    }
+
+    void Window::cleanup() {
+        LogDebug("Window::cleanup");
 
         glfwDestroyWindow(_context->windowHandle);
         glfwTerminate();
@@ -67,6 +71,8 @@ namespace octo {
             windowPtr->_keyboardState.keyDown[key] = false;
 
             if (windowPtr->getTimestamp() - windowPtr->_keyboardState.keyDownTime[key] < windowPtr->_context->inputDownTimeThreshold) {
+                LogDebug("Window::_keyCallBack: key pressed:", key);
+
                 for (auto callback : windowPtr->_keyPressedEventListeners) {
                     if (callback.first == key) {
                         callback.second(mods);
@@ -94,6 +100,8 @@ namespace octo {
             windowPtr->_mouseState.buttonDown[button] = false;
 
             if (windowPtr->getTimestamp() - windowPtr->_mouseState.buttonDownTime[button] < windowPtr->_context->inputDownTimeThreshold) {
+                LogDebug("Window::_mouseButtonCallBack: button pressed:", button);
+                
                 for (auto callback : windowPtr->_buttonClickedEventListeners) {
                     if (callback.first == button) {
                         callback.second(mods);

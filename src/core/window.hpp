@@ -36,6 +36,7 @@ namespace octo {
         Window(Context*);
         ~Window();
 
+        void cleanup();
         bool pollEvents();
         void shutdown();
         long long getTimestamp();
@@ -70,6 +71,4 @@ namespace octo {
 
         std::list<std::function<void(int width, int height)>> _windowResizedListeners;
     };
-
-    // using WindowPtr = std::shared_ptr<Window>;
 }
