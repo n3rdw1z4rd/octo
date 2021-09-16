@@ -8,7 +8,8 @@
 
 namespace octo {
     struct Context {
-        std::string name = "octo";
+        std::string name = ENGINE_NAME;
+        std::string version = VERSION;
         uint32_t width = 1280;
         uint32_t height = 720;
         bool fullscreen = false;

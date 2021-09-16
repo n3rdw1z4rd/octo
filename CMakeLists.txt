@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.20.0)
 project(octo VERSION 0.1.0)
 
+add_definitions(-DENGINE_NAME="${PROJECT_NAME}")
+add_definitions(-DVERSION_MAJOR=${PROJECT_VERSION_MAJOR})
+add_definitions(-DVERSION_MINOR=${PROJECT_VERSION_MINOR})
+add_definitions(-DVERSION_PATCH=${PROJECT_VERSION_PATCH})
+
 file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})

@@ -4,7 +4,7 @@
 #include "utils/logger.hpp"
 
 int main(int argc, char** argv) {
-    LogDebug("main: starting octo...");
+    LogDebug("main: starting", ENGINE_NAME_AND_VERSION);
 
     octo::Context context{};
     octo::Window window{&context};

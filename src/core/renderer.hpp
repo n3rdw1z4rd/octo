@@ -99,6 +99,7 @@ namespace octo {
 
         std::vector<Vertex> vertices;
         std::vector<uint32_t> indices;
+        
         VkBuffer vertexBuffer;
         VkDeviceMemory vertexBufferMemory;
         VkBuffer indexBuffer;
