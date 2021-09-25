@@ -1,34 +1,29 @@
-#include "core/application.hpp"
+#include "core/context.hpp"
+#include "core/window.hpp"
+#include "core/renderer.hpp"
+#include "utils/logger.hpp"
 
-#include <cstdlib>
-#include <iostream>
-#include <stdexcept>
+int main(int argc, char** argv) {
+    LogDebug("main: starting", ENGINE_NAME_AND_VERSION);
 
-#include <spdlog/spdlog.h>
+    octo::Context context{};
+    octo::Window window{&context};
+    octo::Renderer renderer{&context};
 
-int main(int argc, char **argv)
-{
-    spdlog::set_level(spdlog::level::debug);
-    spdlog::debug("ProjectName: {}", PROJECT_NAME);
+    LogDebug("main: setting up event listeners");
+    window.onWindowResized([&](int width, int height) {
+        renderer.resize(width, height);
+    });
 
-    for (int i = 0; i < argc; i++)
-    {
-        spdlog::debug("args: {}: {}", i, argv[i]);
+    window.onKeyPressed(GLFW_KEY_ESCAPE, [&](int mods) {
+        LogDebug("main: onKeyPress: GLFW_KEY_ESCAPE");
+        window.shutdown();
+    });
+
+    LogDebug("main: Starting MainLoop");
+    while (window.pollEvents()) {
+        renderer.render();
     }
 
-    octo::Application app{argc, argv};
-
-    try
-    {
-        if (app.init()) {
-            app.start();
-        }
-    }
-    catch (const std::exception &e)
-    {
-        spdlog::error(e.what());
-        return EXIT_FAILURE;
-    }
-
-    return EXIT_SUCCESS;
+    return 0;
 }

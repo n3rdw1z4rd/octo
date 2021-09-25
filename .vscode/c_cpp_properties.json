@@ -7,8 +7,8 @@
                 "${VULKAN_SDK}\\Include",
                 "${SDKS_ROOT}\\glfw\\include",
                 "${SDKS_ROOT}\\glm\\glm",
-                "${SDKS_ROOT}\\spdlog\\include",
-                "${workspaceFolder}\\**"
+                "${SDKS_ROOT}\\entt\\src",
+                "${workspaceFolder}\\src\\**"
             ],
             "defines": [
                 "_DEBUG",
@@ -24,15 +24,13 @@
         {
             "name": "Linux",
             "includePath": [
-                "${VULKAN_SDK}/include",
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/src/**"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
             ],
-            "windowsSdkVersion": "10.0.19041.0",
             "compilerPath": "/usr/bin/g++",
             "cStandard": "c17",
             "cppStandard": "c++17",
