@@ -47,6 +47,16 @@ void log_info(const char *fmt, ...)
     fprintf(stdout, OCTO_LOGGER_RESET);
 }
 
+void log_system(const char *fmt, ...)
+{
+    fprintf(stdout, "\n%s", OCTO_LOGGER_SYSTEM);
+    va_list argp;
+    va_start(argp, fmt);
+    _vlog(stdout, fmt, argp);
+    va_end(argp);
+    fprintf(stdout, OCTO_LOGGER_RESET);
+}
+
 void log_warn(const char *fmt, ...)
 {
     fprintf(stdout, "\n%s", OCTO_LOGGER_WARN);
