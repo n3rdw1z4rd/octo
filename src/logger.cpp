@@ -1,4 +1,7 @@
 #include "../include/logger.hpp"
+#include "../include/utils.hpp"
+
+#include <cstdarg>
 
 void _print_current_time()
 {
@@ -13,11 +16,10 @@ void _print_current_time()
         lt->tm_mday,
         lt->tm_hour,
         lt->tm_min,
-        lt->tm_sec
-    );
+        lt->tm_sec);
 }
 
-void _vlog(FILE *const stream, const char *fmt, va_list argp)
+void _print_formated_va_list(FILE *const stream, const char *fmt, va_list argp)
 {
 #ifndef OCTO_LOGGER_NO_SHOW_TIMESTAMP
     _print_current_time();
@@ -31,7 +33,7 @@ void log_debug(const char *fmt, ...)
     fprintf(stdout, "\n%s", OCTO_LOGGER_DEBUG);
     va_list argp;
     va_start(argp, fmt);
-    _vlog(stdout, fmt, argp);
+    _print_formated_va_list(stdout, fmt, argp);
     va_end(argp);
     fprintf(stdout, OCTO_LOGGER_RESET);
 #endif
@@ -42,7 +44,7 @@ void log_info(const char *fmt, ...)
     fprintf(stdout, "\n%s", OCTO_LOGGER_INFO);
     va_list argp;
     va_start(argp, fmt);
-    _vlog(stdout, fmt, argp);
+    _print_formated_va_list(stdout, fmt, argp);
     va_end(argp);
     fprintf(stdout, OCTO_LOGGER_RESET);
 }
@@ -52,7 +54,7 @@ void log_system(const char *fmt, ...)
     fprintf(stdout, "\n%s", OCTO_LOGGER_SYSTEM);
     va_list argp;
     va_start(argp, fmt);
-    _vlog(stdout, fmt, argp);
+    _print_formated_va_list(stdout, fmt, argp);
     va_end(argp);
     fprintf(stdout, OCTO_LOGGER_RESET);
 }
@@ -62,7 +64,7 @@ void log_warn(const char *fmt, ...)
     fprintf(stdout, "\n%s", OCTO_LOGGER_WARN);
     va_list argp;
     va_start(argp, fmt);
-    _vlog(stdout, fmt, argp);
+    _print_formated_va_list(stdout, fmt, argp);
     va_end(argp);
     fprintf(stdout, OCTO_LOGGER_RESET);
 }
@@ -72,7 +74,7 @@ void log_error(const char *fmt, ...)
     fprintf(stderr, "\n%s", OCTO_LOGGER_ERROR);
     va_list argp;
     va_start(argp, fmt);
-    _vlog(stderr, fmt, argp);
+    _print_formated_va_list(stderr, fmt, argp);
     va_end(argp);
     fprintf(stderr, OCTO_LOGGER_RESET);
 }

@@ -1,6 +1,9 @@
-#include "../include/octo.hpp"
+// #include "../include/octo.hpp"
+#include "../include/tests.hpp"
 
 int main(int argc, char** argv) {
+    octo::DictionaryTest();
+
     // octo_init();
 
     // auto *handle = octo_create_default_window();

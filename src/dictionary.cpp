@@ -1,69 +1,54 @@
 #include "../include/dictionary.hpp"
-#include "../include/utils.hpp"
 
 namespace octo
 {
+    //     Dictionary::Dictionary() {}
+    //     Dictionary::~Dictionary() {}
+
+    //     void Dictionary::set(const std::string &key, const std::string &val)
+    //     {
+    //         map[key] = val;
+    //     }
+
+    //     void Dictionary::set(const std::string &key, int val)
+    //     {
+    //         map[key] = val;
+    //     }
+
+    //     void Dictionary::set(const std::string &key, float val)
+    //     {
+    //         map[key] = val;
+    //     }
+
+    //     template <typename T>
+    //     T Dictionary::get(const std::string &key)
+    //     {
+    //         return std::any_cast<T>(map[key]);
+    //     }
+
+    //     void Dictionary::dump() {}
+
     Dictionary::Dictionary() {}
     Dictionary::~Dictionary() {}
 
-    StringMapIterator Dictionary::find(const std::string &key)
+    void Dictionary::set(const std::string &key, int val)
     {
-        StringMapIterator it;
-
-        if (_map.size() > 0)
-        {
-            it = _map.begin();
-
-            while (it != _map.end())
-            {
-                if (it->first == key)
-                {
-                    break;
-                }
-
-                ++it;
-            }
-
-            return it;
-        }
+        dict[key] = val;
     }
 
-    void Dictionary::set(const std::string &key, const std::string &value)
+    void Dictionary::set(const std::string &key, const std::string &val)
     {
-        StringMapIterator it;
-
-        if ((it = find(key)) != _map.end())
-        {
-            it->second = value;
-        }
-        else
-        {
-            _map[key] = value;
-        }
+        dict[key] = val;
     }
 
-    template <typename T>
-    void Dictionary::set(const std::string &key, T &value)
+    void Dictionary::set(const std::string &key, float val)
     {
-        std::string _value = ConvertType<std::string>(value);
-        set(key, _value);
-    }
-
-    std::string Dictionary::get(const std::string &key)
-    {
-        StringMapIterator it;
-
-        if ((it = find(key)) == _map.end())
-        {
-            return "";
-        }
-
-        return it->second;
+        dict[key] = val;
     }
 
     template <typename T>
     T Dictionary::get(const std::string &key)
     {
-        return ConvertType<T>(get(key));
+        return std::any_cast<T>(dict[key]);
     }
 }

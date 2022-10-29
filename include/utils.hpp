@@ -1,5 +1,7 @@
 #pragma once
 
+#include <sstream>
+
 namespace octo
 {
     template <typename OUT, typename IN>
