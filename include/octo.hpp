@@ -2,6 +2,7 @@
 
 #include "defines.hpp"
 #include "logger.hpp"
+#include "dictionary.hpp"
 
 #include <GLFW/glfw3.h>
 
