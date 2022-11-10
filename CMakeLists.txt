@@ -35,7 +35,7 @@ if (WIN32)
     target_include_directories(${PROJECT_NAME} PUBLIC
         "C:\\VulkanSDK\\1.3.231.1\\Include"
         ${glfw_SOURCE_DIR}/include
-        ${CMAKE_SOURCE_DIR}/include
+        ${PROJECT_SOURCE_DIR}/include
     )
 
     target_link_directories(${PROJECT_NAME} PUBLIC
@@ -46,7 +46,14 @@ if (WIN32)
     target_link_libraries(${PROJECT_NAME} glfw3 vulkan-1 shaderc_shared)
 elseif (UNIX)
     target_include_directories(${PROJECT_NAME} PUBLIC
-        ${PROJECT_SOURCE_DIR}/src
+        $ENV{HOME}/dev/VulkanSDK/1.3.231.1/macos/include
+        ${glfw_SOURCE_DIR}/include
+        ${PROJECT_SOURCE_DIR}/include
+    )
+
+    target_link_directories(${PROJECT_NAME} PUBLIC
+        $ENV{HOME}/dev/VulkanSDK/1.3.231.1/macos/lib
+        ${glfw_BINARY_DIR}/src/Debug
     )
 
     target_link_libraries(${PROJECT_NAME} glfw vulkan shaderc_shared)

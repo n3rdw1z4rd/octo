@@ -2,7 +2,8 @@
 
 #include "version.hpp"
 
-#define GLFW_INCLUDE_VULKAN
+// #define GLFW_INCLUDE_VULKAN
+#define GLFW_CLIENT_NO_API
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
