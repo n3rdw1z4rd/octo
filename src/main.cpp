@@ -1,7 +1,7 @@
-#include "core/context.hpp"
-#include "core/window.hpp"
-#include "core/renderer.hpp"
-#include "utils/logger.hpp"
+#include "../include/context.hpp"
+#include "../include/window.hpp"
+#include "../include/renderer.hpp"
+#include "../include/logger.hpp"
 
 int main(int argc, char** argv) {
     LogDebug("main: starting", ENGINE_NAME_AND_VERSION);

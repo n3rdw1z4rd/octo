@@ -1,6 +1,5 @@
-#include "shader.hpp"
-
-#include "logger.hpp"
+#include "../include/logger.hpp"
+#include "../include/shader.hpp"
 
 std::vector<uint32_t> CompileShaderSource(
     const std::string& name,

@@ -1,5 +1,5 @@
-#include "window.hpp"
-#include "utils/logger.hpp"
+#include "../include/window.hpp"
+#include "../include/logger.hpp"
 
 #include <GLFW/glfw3native.h>
 #include <chrono>

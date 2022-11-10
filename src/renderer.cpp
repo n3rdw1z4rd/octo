@@ -1,12 +1,13 @@
-#include "renderer.hpp"
-#include "utils/logger.hpp"
-#include "utils/shader.hpp"
+#include "../include/renderer.hpp"
+#include "../include/logger.hpp"
+#include "../include/shader.hpp"
 
 #include <third_party/tiny_obj_loader.h>
 #include <third_party/stb_image.h>
 
 #include <set>
 #include <chrono>
+#include <algorithm>
 
 namespace octo {
     VkResult CreateDebugUtilsMessengerEXT(
