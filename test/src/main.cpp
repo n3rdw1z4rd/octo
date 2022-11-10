@@ -2,10 +2,14 @@
 
 int main(int argc, char **argv)
 {
-    log_debug("DEBUG LOG");
-    log_info("INFO LOG");
-    log_warn("WARNING LOG");
-    log_error("ERROR LOG");
+    octo::Context *ctx = octo::create_default_context();
+
+    if (!octo::init(ctx)) {
+        return 1;
+    }
+
+    octo::main_loop(ctx);
+    octo::shutdown(ctx);
 
     return 0;
 }
