@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo pacman -Sy vulkan-devel glfw-x11 glm shaderc

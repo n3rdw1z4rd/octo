@@ -1,18 +1,18 @@
 cmake_minimum_required(VERSION 3.20.0)
 project(octo VERSION 0.1.0 LANGUAGES CXX)
 
-include(FetchContent)
+# include(FetchContent)
 
-FetchContent_Declare(glfw
-    GIT_REPOSITORY git@github.com:glfw/glfw.git
-    GIT_TAG 3.3.8
-)
+# FetchContent_Declare(glfw
+#     GIT_REPOSITORY git@github.com:glfw/glfw.git
+#     GIT_TAG 3.3.8
+# )
 
-set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+# set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+# set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+# set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-FetchContent_MakeAvailable(glfw)
+# FetchContent_MakeAvailable(glfw)
 
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
@@ -50,14 +50,14 @@ if (WIN32)
     target_link_libraries(${PROJECT_NAME} glfw3 vulkan-1 shaderc_shared)
 elseif (UNIX)
     target_include_directories(${PROJECT_NAME} PUBLIC
-        $ENV{HOME}/dev/VulkanSDK/1.3.231.1/macos/include
-        ${glfw_SOURCE_DIR}/include
+        # $ENV{HOME}/dev/VulkanSDK/1.3.231.1/macos/include
+        # ${glfw_SOURCE_DIR}/include
         ${PROJECT_SOURCE_DIR}/include
     )
 
     target_link_directories(${PROJECT_NAME} PUBLIC
         $ENV{HOME}/dev/VulkanSDK/1.3.231.1/macos/lib
-        ${glfw_BINARY_DIR}/src/Debug
+        # ${glfw_BINARY_DIR}/src/Debug
     )
 
     target_link_libraries(${PROJECT_NAME} glfw vulkan shaderc_shared)
