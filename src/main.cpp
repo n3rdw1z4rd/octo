@@ -11,6 +11,7 @@ int main(int argc, char** argv) {
     octo::Renderer renderer{&context};
 
     LogDebug("main: setting up event listeners");
+
     window.onWindowResized([&](int width, int height) {
         renderer.resize(width, height);
     });
@@ -21,6 +22,7 @@ int main(int argc, char** argv) {
     });
 
     LogDebug("main: Starting MainLoop");
+    
     while (window.pollEvents()) {
         renderer.render();
     }

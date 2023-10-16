@@ -21,8 +21,8 @@ namespace std {
 }
 
 namespace octo {
-    const std::string MODEL_PATH = "../assets/viking_room.obj";
-    const std::string TEXTURE_PATH = "../assets/viking_room.png";
+    const std::string MODEL_PATH = "assets/viking_room.obj";
+    const std::string TEXTURE_PATH = "assets/viking_room.png";
 
     const int MAX_FRAMES_IN_FLIGHT = 2;
 
