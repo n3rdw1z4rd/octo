@@ -27,10 +27,18 @@
 #define ENGINE_NAME_AND_VERSION ENGINE_NAME " v" VERSION
 #endif
 
-#if defined(PLATFORM_LINUX)
-#if defined(WAYLAND_DISPLAY)
-#define DISPLAY_WAYLAND
-#elif defined(DISPLAY)
-#define DISPLAY_X11
+#if defined(PLATFORM_WINDOWS)
+#include <windows.h>
+static bool win_console_initialized = false;
 #endif
-#endif
+
+// #define GLFW_CLIENT_NO_API
+#define GLFW_INCLUDE_VULKAN
+
+// #define GLM_FORCE_RADIANS
+// #define GLM_FORCE_DEPTH_ZERO_TO_ONE
+// #define GLM_ENABLE_EXPERIMENTAL
+
+// #define STB_IMAGE_IMPLEMENTATION
+
+// #define TINYOBJLOADER_IMPLEMENTATION

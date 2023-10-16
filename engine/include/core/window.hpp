@@ -1,6 +1,6 @@
 #pragma once
 
-#include "defines.hpp"
+#include "definitions.hpp"
 #include "context.hpp"
 
 #include <GLFW/glfw3.h>

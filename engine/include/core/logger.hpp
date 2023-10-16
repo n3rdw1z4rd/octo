@@ -1,6 +1,6 @@
 #pragma once
 
-#include "defines.hpp"
+#include "definitions.hpp"
 
 #include <sstream>
 #include <iostream>
