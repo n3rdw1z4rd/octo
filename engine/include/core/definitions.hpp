@@ -32,7 +32,7 @@
 static bool win_console_initialized = false;
 #endif
 
-#define OCTO_VULKAN_API_VERSION VK_API_VERSION_1_2
+#define OCTO_VULKAN_API_VERSION VK_API_VERSION_1_3
 
 // #define GLFW_CLIENT_NO_API
 #define GLFW_INCLUDE_VULKAN
