@@ -19,7 +19,7 @@ namespace octo
     template <typename... Args>
     void LogMessage(const char *level_color, const char *level_string, const Args &...args)
     {
-#if defined(PLATFORM_WINDOWS)
+#if defined(OCTO_PLATFORM_WINDOWS)
         if (!win_console_initialized)
         {
             HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);

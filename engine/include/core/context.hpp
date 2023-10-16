@@ -10,8 +10,8 @@ namespace octo
 {
     struct Context
     {
-        std::string name = ENGINE_NAME;
-        std::string version = VERSION;
+        std::string name = OCTO_PRODUCT_NAME;
+        std::string version = OCTO_VERSION;
         uint32_t width = 1280;
         uint32_t height = 720;
         bool fullscreen = false;

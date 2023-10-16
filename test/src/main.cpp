@@ -1,10 +1,13 @@
 #include <octo.hpp>
+#include <renderer/renderer.hpp>
 
 int main(int argc, char **argv)
 {
     octo::Context context{};
+    context.name = "octo | test";
+
     octo::Window window{&context};
-    // octo::Renderer renderer{&context};
+    octo::Renderer renderer{&context};
 
     octo::LogDebug("octotest: setting up event listeners");
 

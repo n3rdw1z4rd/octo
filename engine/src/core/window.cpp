@@ -12,7 +12,7 @@ namespace octo
 
         if (glfwInit() == GLFW_FALSE)
         {
-            throw std::runtime_error("Failed to initialize GLFW");
+            throw std::runtime_error("octo::Window: Failed to initialize GLFW");
         }
 
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -23,7 +23,7 @@ namespace octo
 
         if (!_context->windowHandle)
         {
-            throw std::runtime_error("Window: failed to create window");
+            throw std::runtime_error("octo::Window: failed to create window");
         }
 
         glfwSetWindowUserPointer(_context->windowHandle, this);

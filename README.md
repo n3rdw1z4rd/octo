@@ -4,7 +4,7 @@
 - Arch Linux:
     - `sudo pacman -Sy vulkan-devel glfw-x11 glm shaderc`
 - MacOS:
-    - `brew install glfw3`
+    - `brew install glfw glm`
 - Windows:
     - TBD
 
