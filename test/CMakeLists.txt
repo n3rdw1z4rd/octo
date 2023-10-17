@@ -21,9 +21,20 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     target_link_libraries(${PROJECT_NAME} octo glfw vulkan)#glfw vulkan shaderc_shared)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     message("==> Building for: MACOS")
-    target_include_directories(${PROJECT_NAME} PUBLIC ../engine/include /opt/homebrew/include)
-    target_link_directories(${PROJECT_NAME} PUBLIC /opt/homebrew/lib ../engine/build/)
-    target_link_libraries(${PROJECT_NAME} octo glfw)# vulkan shaderc_shared)
+    
+    target_include_directories(${PROJECT_NAME} PUBLIC
+        $ENV{HOME}/dev/VulkanSDK/1.3.261.1/macos/include
+        /opt/homebrew/include
+        ../engine/include
+    )
+    
+    target_link_directories(${PROJECT_NAME} PUBLIC
+        $ENV{HOME}/dev/VulkanSDK/1.3.261.1/macos/lib
+        /opt/homebrew/lib
+        ../engine/build
+    )
+    
+    target_link_libraries(${PROJECT_NAME} octo glfw vulkan)# vulkan shaderc_shared)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     message("==> Building for: WINDOWS")
 endif()

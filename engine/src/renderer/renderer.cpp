@@ -1,8 +1,5 @@
-#include "../include/renderer/renderer.hpp"
-#include "../include/core/logger.hpp"
-// #include "../include/core/definitions.hpp"
-
-// #include <vulkan/vulkan.h>
+#include "../../include/renderer/renderer.hpp"
+#include "../../include/core/logger.hpp"
 
 #include <stdexcept>
 #include <cstdlib>
@@ -76,6 +73,19 @@ namespace octo
         createInfo.enabledExtensionCount = glfwExtensionCount;
         createInfo.ppEnabledExtensionNames = glfwExtensions;
         createInfo.enabledLayerCount = 0;
+
+        #if defined(OCTO_PLATFORM_MACOS)
+        std::vector<const char*> requiredExtensions;
+        
+        for(uint32_t i = 0; i < glfwExtensionCount; i++) {
+            requiredExtensions.emplace_back(glfwExtensions[i]);
+        }
+        
+        requiredExtensions.emplace_back(VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME);
+        createInfo.flags |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
+        createInfo.enabledExtensionCount = (uint32_t) requiredExtensions.size();
+        createInfo.ppEnabledExtensionNames = requiredExtensions.data();
+        #endif
 
         if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS)
         {

@@ -22,9 +22,18 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     message("==> Building for: MACOS")
     target_compile_definitions(${PROJECT_NAME} PUBLIC -DOCTO_PLATFORM_MACOS)
-    target_include_directories(${PROJECT_NAME} PUBLIC /opt/homebrew/include)
-    target_link_directories(${PROJECT_NAME} PUBLIC /opt/homebrew/lib)
-    target_link_libraries(${PROJECT_NAME} glfw)# vulkan shaderc_shared)
+    
+    target_include_directories(${PROJECT_NAME} PUBLIC
+        $ENV{HOME}/dev/VulkanSDK/1.3.261.1/macos/include
+        /opt/homebrew/include
+    )
+    
+    target_link_directories(${PROJECT_NAME} PUBLIC
+        $ENV{HOME}/dev/VulkanSDK/1.3.261.1/macos/lib
+        /opt/homebrew/lib
+    )
+    
+    target_link_libraries(${PROJECT_NAME} glfw vukan)# vulkan shaderc_shared)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     message("==> Building for: WINDOWS")
     target_compile_definitions(${PROJECT_NAME} PUBLIC -DOCTO_PLATFORM_WINDOWS)
