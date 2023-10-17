@@ -11,9 +11,8 @@ int main(int argc, char **argv)
 
     octo::LogDebug("octotest: setting up event listeners");
 
-    // window.onWindowResized([&](int width, int height) {
-    //     renderer.resize(width, height);
-    // });
+    window.onWindowResized([&](int width, int height)
+                           { renderer.resize(width, height); });
 
     window.onKeyPressed(GLFW_KEY_ESCAPE, [&](int mods)
                         {
