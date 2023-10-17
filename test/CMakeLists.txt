@@ -12,15 +12,16 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC
     -DVERSION_MINOR=${PROJECT_VERSION_MINOR}
     -DVERSION_PATCH=${PROJECT_VERSION_PATCH}
     -DNOMINMAX
+    -DCMAKE_BUILD_TYPE=Debug
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    message("==> Building for: LINUX")
+    message("\t*** Building for: LINUX ***")
     target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include ../engine/include)
     target_link_directories(${PROJECT_NAME} PUBLIC ../engine/build/)
     target_link_libraries(${PROJECT_NAME} octo glfw vulkan)#glfw vulkan shaderc_shared)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-    message("==> Building for: MACOS")
+    message("\t*** Building for: MACOS ***")
     
     target_include_directories(${PROJECT_NAME} PUBLIC
         $ENV{HOME}/dev/VulkanSDK/1.3.261.1/macos/include
@@ -36,5 +37,5 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     
     target_link_libraries(${PROJECT_NAME} octo glfw vulkan)# vulkan shaderc_shared)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    message("==> Building for: WINDOWS")
+    message("\t*** Building for: WINDOWS ***")
 endif()
