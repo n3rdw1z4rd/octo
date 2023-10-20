@@ -17,7 +17,7 @@ typedef double f64;
 
 typedef unsigned char bool;
 
-#if CMAKE_BUILD_TYPE == Debug
+#if !NDEBUG
 #define OCTO_DEBUG
 #endif
 

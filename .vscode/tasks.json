@@ -2,12 +2,32 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "BUILD",
+            "label": "build-debug",
             "windows": {
-                "command": "${workspaceFolder}/build.bat",
+                "command": "${workspaceFolder}/build-debug.bat",
             },
             "linux": {
-                "command": "${workspaceFolder}/build.sh",
+                "command": "${workspaceFolder}/build-debug.sh",
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "build-release",
+            "windows": {
+                "command": "${workspaceFolder}/build-release.bat",
+            },
+            "linux": {
+                "command": "${workspaceFolder}/build-release.sh",
             },
             "options": {
                 "cwd": "${workspaceFolder}"

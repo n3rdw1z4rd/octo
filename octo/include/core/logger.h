@@ -33,9 +33,17 @@ OCTO_API void __log_message(LogLevel log_level, const char *msg_format, ...);
 #endif
 
 #ifndef LOG_DEBUG
+#ifdef OCTO_DEBUG
 #define LOG_DEBUG(msg, ...) __log_message(LOG_LEVEL_DEBUG, msg, ##__VA_ARGS__)
+#else
+#define LOG_DEBUG(msg, ...)
+#endif
 #endif
 
 #ifndef LOG_TRACE
+#ifdef OCTO_DEBUG
 #define LOG_TRACE(msg, ...) __log_message(LOG_LEVEL_TRACE, msg, ##__VA_ARGS__)
+#else
+#define LOG_TRACE(msg, ...)
+#endif
 #endif

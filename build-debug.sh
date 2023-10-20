@@ -5,24 +5,27 @@ clear
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 
+TARGET=Debug
+BUILD_DIR=build/debug
+
 echo(){
-    builtin echo "*** BUILD: $1"
+    builtin echo "*** $TARGET BUILD: $1"
 }
 
-if [ ! -d "build" ]; then
+if [ ! -d "$BUILD_DIR" ]; then
     echo "creating build directory..."
-    cmake -B build -S .
+    cmake -DCMAKE_BUILD_TYPE=$TARGET -B $BUILD_DIR -S .
 else
     echo "cleaning build directory..."
-    cmake --build build --target clean
+    cmake --build $BUILD_DIR --target clean
 fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "building for GNU/Linux..."
-    cmake --build build -j$(nproc)
+    cmake --build $BUILD_DIR -j$(nproc)
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo "building for macOS..."
-    cmake --build build -j$(sysctl -n hw.ncpu)
+    cmake --build $BUILD_DIR -j$(sysctl -n hw.ncpu)
 elif [[ "$OSTYPE" == "windows"* ]]; then
     echo "building for Windows..."
 fi

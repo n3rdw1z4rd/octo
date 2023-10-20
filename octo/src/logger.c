@@ -14,7 +14,7 @@ static bool win_console_initialized = false;
 #endif
 
 const char *_color_strings[6] = {
-    "\033[0;41m",
+    "\033[1;41m",
     "\033[1;31m",
     "\033[1;33m",
     "\033[1;32m",
