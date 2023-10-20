@@ -12,6 +12,11 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC
     -DVERSION_PATCH=${PROJECT_VERSION_PATCH}
 )
 
+if (ENV{BUILD_TYPE} STREQUAL "BUILD_TYPE_DEBUG")
+    message("BUILD_TYPE_DEBUG")
+    target_compile_definitions(${PROJECT_NAME} PUBLIC -DOCTO_DEBUG)
+endif()
+
 target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/include
 )

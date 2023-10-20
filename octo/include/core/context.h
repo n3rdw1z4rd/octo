@@ -5,7 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <string>
 
-typedef struct Context
+typedef struct OctoApplicationContext
 {
     const char *applicationName;
     const char *applicationVersion;
@@ -16,4 +16,4 @@ typedef struct Context
     bool fullscreen = false;
     int inputDownTimeThreshold = 250;
     // GLFWwindow *windowHandle;
-} Context;
+} OctoApplicationContext;

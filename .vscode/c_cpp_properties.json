@@ -6,7 +6,7 @@
                 "${workspaceFolder}/octo/include"
             ],
             "defines": [
-                "_DEBUG",
+                // "_DEBUG",
                 "UNICODE",
                 "_UNICODE",
                 "OCTO_EXPORT"
@@ -22,7 +22,7 @@
                 "${workspaceFolder}/octo/include"
             ],
             "defines": [
-                "_DEBUG",
+                // "_DEBUG",
                 "UNICODE",
                 "_UNICODE",
                 "OCTO_EXPORT"
@@ -39,7 +39,7 @@
                 "${VULKAN_SDK}/include"
             ],
             "defines": [
-                "_DEBUG",
+                // "_DEBUG",
                 "UNICODE",
                 "_UNICODE",
                 "OCTO_EXPORT"

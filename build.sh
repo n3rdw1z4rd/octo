@@ -11,7 +11,7 @@ echo(){
 
 if [ ! -d "build" ]; then
     echo "creating build directory..."
-    cmake -DCMAKE_BUILD_TYPE=Debug -B build -S .
+    cmake -B build -S .
 else
     echo "cleaning build directory..."
     cmake --build build --target clean

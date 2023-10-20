@@ -1,81 +1,53 @@
-// #include "../include/core/logger.h"
+#include "../include/core/logger.h"
+#include "../include/core/time.h"
 
-// #define RED "\033[31m"
-// #define YELLOW "\033[33m"
-// #define WHITE "\033[1m"
-// #define GREY "\033[2m"
+#include <stdio.h>
+#include <stdarg.h>
+#include <string.h>
 
-// #define CYAN "\033[36m"
-// #define RESET "\033[0;0m"
+#define CYAN "\033[36m"
+#define RESET "\033[0;0m"
 
-// #ifdef OCTO_PLATFORM_WINDOWS
-// #include <windows.h>
-// static bool win_console_initialized = false;
-// #endif
+#ifdef OCTO_PLATFORM_WINDOWS
+#include <windows.h>
+static bool win_console_initialized = false;
+#endif
 
-// const char *_colors[6] = {RED, RED, YELLOW, WHITE, GREY, GREY};
+const char *_color_strings[6] = {
+    "\033[0;41m",
+    "\033[1;31m",
+    "\033[1;33m",
+    "\033[1;32m",
+    "\033[1;34m",
+    "\033[1;30m"};
 
-// const char *_levels[6] = {
-//     "[FATAL]",
-//     "[ERROR]",
-//     "[WARN] ",
-//     "[INFO] ",
-//     "[DEBUG]",
-//     "[TRACE]"};
+const char *_level_strings[6] = {
+    "[FATAL]",
+    "[ERROR]",
+    "[WARN] ",
+    "[INFO] ",
+    "[DEBUG]",
+    "[TRACE]"};
 
-// std::string
-// _get_now_time()
-// {
-//     auto now = std::chrono::system_clock::now();
-//     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
-//     auto timer = std::chrono::system_clock::to_time_t(now);
+void __log_message(LogLevel log_level, const char *msg_format, ...)
+{
+    bool is_error = (log_level < LOG_LEVEL_WARN);
 
-//     std::tm bt = *std::localtime(&timer);
-//     std::ostringstream oss;
+    char args[OCTO_MAX_LOG_LENGTH];
+    memset(args, 0, sizeof(args));
 
-//     oss << std::put_time(&bt, "%Y-%m-%d %H:%M:%S");
-//     oss << '.' << std::setfill('0') << std::setw(3) << ms.count();
+    __builtin_va_list ptr;
+    va_start(ptr, msg_format);
+    vsnprintf(args, OCTO_MAX_LOG_LENGTH, msg_format, ptr);
+    va_end(ptr);
 
-//     return oss.str();
-// }
-
-// // OCTO_API void _log(LogLevel level, const char *string_format, ...)
-// // {
-// //     const bool is_error = (level < LOG_LEVEL_WARN);
-
-// // }
-
-// template <typename... Args>
-// void LogMessage(LogLevel log_level, const Args &...args)
-// {
-// #ifdef OCTO_PLATFORM_WINDOWS
-//     if (!win_console_initialized)
-//     {
-//         HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-
-//         if (handle != INVALID_HANDLE_VALUE)
-//         {
-//             DWORD mode = 0;
-//             if (GetConsoleMode(handle, &mode))
-//             {
-//                 mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-//                 SetConsoleMode(handle, mode);
-//             }
-//         }
-
-//         win_console_initialized = true;
-//     }
-// #endif
-//     const bool is_error = (log_level < LOG_LEVEL_WARN);
-
-//     std::stringstream ss;
-
-//     ss << CYAN << _get_now_time() << RESET;
-//     ss << ' ' << _colors[log_level] << _levels[log_level];
-
-//     ((ss << ' ' << args), ...);
-
-//     ss << RESET;
-
-//     std::cout << ss.str() << std::endl;
-// }
+    printf(
+        "%s%s%s %s%s %s%s\n",
+        CYAN,
+        get_date_time_stamp(),
+        RESET,
+        _color_strings[log_level],
+        _level_strings[log_level],
+        args,
+        RESET);
+}

@@ -2,6 +2,8 @@
 
 #include "defines.h"
 
+#define OCTO_MAX_LOG_LENGTH 1024
+
 typedef enum LogLevel
 {
     LOG_LEVEL_FATAL,
@@ -10,45 +12,30 @@ typedef enum LogLevel
     LOG_LEVEL_INFO,
     LOG_LEVEL_DEBUG,
     LOG_LEVEL_TRACE
-};
+} LogLevel;
 
-// OCTO_API void _log(LogLevel level, const char* string_format, ...);
+OCTO_API void __log_message(LogLevel log_level, const char *msg_format, ...);
 
-template <typename... Args>
-void LogMessage(LogLevel log_level, const Args &...args);
+#ifndef LOG_FATAL
+#define LOG_FATAL(msg, ...) __log_message(LOG_LEVEL_FATAL, msg, ##__VA_ARGS__)
+#endif
 
-// template <typename... Args>
-// void LogFatal(const Args &...args)
-// {
-//     LogMessage(LOG_LEVEL_FATAL, args...);
-// }
+#ifndef LOG_ERROR
+#define LOG_ERROR(msg, ...) __log_message(LOG_LEVEL_ERROR, msg, ##__VA_ARGS__)
+#endif
 
-// template <typename... Args>
-// void LogError(const Args &...args)
-// {
-//     LogMessage(LOG_LEVEL_ERROR, args...);
-// }
+#ifndef LOG_WARN
+#define LOG_WARN(msg, ...) __log_message(LOG_LEVEL_WARN, msg, ##__VA_ARGS__)
+#endif
 
-// template <typename... Args>
-// void LogWarn(const Args &...args)
-// {
-//     LogMessage(LOG_LEVEL_WARN, args...);
-// }
+#ifndef LOG_INFO
+#define LOG_INFO(msg, ...) __log_message(LOG_LEVEL_INFO, msg, ##__VA_ARGS__)
+#endif
 
-// template <typename... Args>
-// void LogInfo(const Args &...args)
-// {
-//     LogMessage(LOG_LEVEL_INFO, args...);
-// }
+#ifndef LOG_DEBUG
+#define LOG_DEBUG(msg, ...) __log_message(LOG_LEVEL_DEBUG, msg, ##__VA_ARGS__)
+#endif
 
-// template <typename... Args>
-// void LogDebug(const Args &...args)
-// {
-//     LogMessage(LOG_LEVEL_DEBUG, args...);
-// }
-
-// template <typename... Args>
-// void LogTrace(const Args &...args)
-// {
-//     LogMessage(LOG_LEVEL_TRACE, args...);
-// }
+#ifndef LOG_TRACE
+#define LOG_TRACE(msg, ...) __log_message(LOG_LEVEL_TRACE, msg, ##__VA_ARGS__)
+#endif

@@ -5,27 +5,48 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(Linux) Launch",
+            "name": "Release (Linux)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/test",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/bin/",
-            "environment": [],
-            "preLaunchTask": "Build Debug"
+            "environment": [
+                {
+                    "name": "BUILD_TYPE",
+                    "value": "BUILD_TYPE_RELEASE"
+                }
+            ],
+            "preLaunchTask": "BUILD"
         },
         {
-            "name": "(Windows) Launch",
-            "type": "cppvsdbg",
+            "name": "Debug (Linux)",
+            "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/test.exe",
+            "program": "${workspaceFolder}/bin/test",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/bin/",
-            "environment": [],
-            "console": "newExternalWindow",
-            "preLaunchTask": "Build Debug"
+            "environment": [
+                {
+                    "name": "BUILD_TYPE",
+                    "value": "BUILD_TYPE_DEBUG"
+                }
+            ],
+            "preLaunchTask": "BUILD"
         }
+        // ,{
+        //     "name": "(Windows) Launch",
+        //     "type": "cppvsdbg",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/bin/test.exe",
+        //     "args": [],
+        //     "stopAtEntry": false,
+        //     "cwd": "${workspaceFolder}/bin/",
+        //     "environment": [],
+        //     "console": "newExternalWindow",
+        //     "preLaunchTask": "BUILD"
+        // }
     ]
 }

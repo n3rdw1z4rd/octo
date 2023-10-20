@@ -2,12 +2,12 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "Build Debug",
+            "label": "BUILD",
             "windows": {
-                "command": "${workspaceFolder}/build-debug.bat",
+                "command": "${workspaceFolder}/build.bat",
             },
             "linux": {
-                "command": "${workspaceFolder}/build-debug.sh",
+                "command": "${workspaceFolder}/build.sh",
             },
             "options": {
                 "cwd": "${workspaceFolder}"

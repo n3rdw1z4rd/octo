@@ -15,6 +15,12 @@ typedef signed long long i64;
 typedef float f32;
 typedef double f64;
 
+typedef unsigned char bool;
+
+#if CMAKE_BUILD_TYPE == Debug
+#define OCTO_DEBUG
+#endif
+
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
 #define OCTO_PLATFORM_WINDOWS 1
 #ifndef _WIN64
