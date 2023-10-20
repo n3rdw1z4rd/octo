@@ -4,6 +4,9 @@
 #include <GLFW/glfw3native.h>
 #include <chrono>
 
+static bool _initialized = false;
+static GLFWwindow *_window;
+
 namespace octo
 {
     Window::Window(Context *context)

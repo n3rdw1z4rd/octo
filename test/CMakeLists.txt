@@ -5,9 +5,9 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_compile_definitions(${PROJECT_NAME} PUBLIC
-    -DNOMINMAX
-)
+# target_compile_definitions(${PROJECT_NAME} PUBLIC
+#     -DNOMINMAX
+# )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/../octo/include

@@ -2,82 +2,56 @@
 
 #include "defines.hpp"
 
-#include <sstream>
-#include <iostream>
-
-#ifdef OCTO_PLATFORM_WINDOWS
-#include <windows.h>
-static bool win_console_initialized = false;
-#endif
-
-#define RED "\033[31m"
-#define YELLOW "\033[33m"
-#define WHITE "\033[1m"
-#define GREY "\033[2m"
-#define CYAN "\033[36m"
-#define RESET "\033[0;0m"
-
 namespace octo
 {
-    std::string GetNowTime();
+    enum LogLevel
+    {
+        LOG_LEVEL_FATAL,
+        LOG_LEVEL_ERROR,
+        LOG_LEVEL_WARN,
+        LOG_LEVEL_INFO,
+        LOG_LEVEL_DEBUG,
+        LOG_LEVEL_TRACE
+    };
+
+    // OCTO_API void _log(LogLevel level, const char* string_format, ...);
 
     template <typename... Args>
-    void LogMessage(const char *level_color, const char *level_string, const Args &...args)
-    {
-#ifdef OCTO_PLATFORM_WINDOWS
-        if (!win_console_initialized)
-        {
-            HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    void LogMessage(LogLevel log_level, const Args &...args);
 
-            if (handle != INVALID_HANDLE_VALUE)
-            {
-                DWORD mode = 0;
-                if (GetConsoleMode(handle, &mode))
-                {
-                    mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-                    SetConsoleMode(handle, mode);
-                }
-            }
+    // template <typename... Args>
+    // void LogFatal(const Args &...args)
+    // {
+    //     LogMessage(LOG_LEVEL_FATAL, args...);
+    // }
 
-            win_console_initialized = true;
-        }
-#endif
+    // template <typename... Args>
+    // void LogError(const Args &...args)
+    // {
+    //     LogMessage(LOG_LEVEL_ERROR, args...);
+    // }
 
-        std::stringstream ss;
+    // template <typename... Args>
+    // void LogWarn(const Args &...args)
+    // {
+    //     LogMessage(LOG_LEVEL_WARN, args...);
+    // }
 
-        ss << CYAN << GetNowTime() << RESET;
-        ss << ' ' << level_color << level_string;
+    // template <typename... Args>
+    // void LogInfo(const Args &...args)
+    // {
+    //     LogMessage(LOG_LEVEL_INFO, args...);
+    // }
 
-        ((ss << ' ' << args), ...);
+    // template <typename... Args>
+    // void LogDebug(const Args &...args)
+    // {
+    //     LogMessage(LOG_LEVEL_DEBUG, args...);
+    // }
 
-        ss << RESET;
-
-        std::cout << ss.str() << std::endl;
-    }
-
-    template <typename... Args>
-    void LogError(const Args &...args)
-    {
-        LogMessage(RED, "ERROR", args...);
-    }
-
-    template <typename... Args>
-    void LogWarn(const Args &...args)
-    {
-        LogMessage(YELLOW, " WARN", args...);
-    }
-
-    template <typename... Args>
-    void LogInfo(const Args &...args)
-    {
-        LogMessage(WHITE, " INFO", args...);
-    }
-
-    template <typename... Args>
-    void LogDebug(const Args &...args)
-    {
-#ifndef NDEBUG
-        LogMessage(GREY, "DEBUG", args...);
-#endif
-    }
+    // template <typename... Args>
+    // void LogTrace(const Args &...args)
+    // {
+    //     LogMessage(LOG_LEVEL_TRACE, args...);
+    // }
 }
