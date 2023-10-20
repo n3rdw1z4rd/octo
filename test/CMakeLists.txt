@@ -1,13 +1,9 @@
 cmake_minimum_required(VERSION 3.22)
-project(test VERSION 0.1.0 LANGUAGES CXX)
+project(test VERSION 0.1.0 LANGUAGES C)
 
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${PROJECT_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS ${PROJECT_SOURCE_DIR}/src/*.c)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
-
-# target_compile_definitions(${PROJECT_NAME} PUBLIC
-#     -DNOMINMAX
-# )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/../octo/include
