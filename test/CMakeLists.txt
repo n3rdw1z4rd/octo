@@ -10,7 +10,7 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
-    ../octo/include
+    ${CMAKE_CURRENT_LIST_DIR}/../octo/include
     ${CMAKE_CURRENT_LIST_DIR}/include
 )
 

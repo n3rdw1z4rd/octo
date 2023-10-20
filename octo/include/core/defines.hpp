@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../version.hpp"
+#include "version.hpp"
 
 typedef unsigned char u8;
 typedef unsigned short u16;

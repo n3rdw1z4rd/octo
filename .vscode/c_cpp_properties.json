@@ -3,7 +3,7 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/octo/include/**"
+                "${workspaceFolder}/octo/include"
             ],
             "defines": [
                 "_DEBUG",
@@ -19,7 +19,7 @@
         {
             "name": "Mac - !!! NEEDS_UPDATE !!!",
             "includePath": [
-                "${workspaceFolder}/octo/include/**"
+                "${workspaceFolder}/octo/include"
             ],
             "defines": [
                 "_DEBUG",
@@ -35,7 +35,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/engine/include/**",
+                "${workspaceFolder}/octo/include",
                 "${VULKAN_SDK}/include"
             ],
             "defines": [
