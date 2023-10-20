@@ -1,5 +1,4 @@
 #include "../include/core/logger.h"
-#include "../include/core/time.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,7 +18,7 @@ const char *_color_strings[6] = {
     "\033[1;41m",  // fatal, white on red, bold
     "\033[1;31m",  // error, red on black, bold
     "\033[1;33m",  // warn, yellow on black, bold
-    "\033[1;97m",  // info, white on black, bold
+    "\033[1;32m",  // info, green on black, bold
     "\033[1;90m",  // debug, light gray on black, bold
     "\033[0;90m"}; // trace, dark grey on black
 

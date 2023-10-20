@@ -17,6 +17,9 @@ typedef double f64;
 
 typedef unsigned char bool;
 
+#define false 0
+#define true 1
+
 #if !NDEBUG
 #define OCTO_DEBUG
 #endif

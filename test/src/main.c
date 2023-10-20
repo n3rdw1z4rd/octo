@@ -3,39 +3,38 @@
 int main(int argc, char **argv)
 {
     LOG_INFO("*** OCTO TEST ***");
-    LOG_DEBUG("DEBUG BUILD");
 
-    // LogMessage(LOG_LEVEL_FATAL, "octotest: LogFatal");
+    GameContext *ctx = create_game_context("octo | test");
 
-    // LogFatal("octotest: LogFatal");
-    // LogError("octotest: LogError");
-    // LogWarn("octotest: LogWarn");
-    // LogInfo("octotest: LogInfo");
-    // LogDebug("octotest: LogDebug");
-    // LogTrace("octotest: LogTrace");
+    if (game_init(ctx))
+    {
+        while (true)
+        {
+            game_poll_events();
+        }
 
-    // Context context{};
-    // context.name = "octo | test";
+        // Window window{&ctx};
+        // Renderer renderer{&ctx};
 
-    // Window window{&context};
-    // Renderer renderer{&context};
+        // LogDebug("octotest: setting up event listeners");
 
-    // LogDebug("octotest: setting up event listeners");
+        // window.onWindowResized([&](int width, int height)
+        //                        { renderer.resize(width, height); });
 
-    // window.onWindowResized([&](int width, int height)
-    //                        { renderer.resize(width, height); });
+        // window.onKeyPressed(GLFW_KEY_ESCAPE, [&](int mods)
+        //                     {
+        //     LogDebug("octotest: onKeyPress: GLFW_KEY_ESCAPE");
+        //     window.shutdown(); });
 
-    // window.onKeyPressed(GLFW_KEY_ESCAPE, [&](int mods)
-    //                     {
-    //     LogDebug("octotest: onKeyPress: GLFW_KEY_ESCAPE");
-    //     window.shutdown(); });
+        // LogDebug("octotest: starting main loop");
 
-    // LogDebug("octotest: starting main loop");
+        // while (window.pollEvents())
+        // {
+        //     // renderer.render();
+        // }
+    }
 
-    // while (window.pollEvents())
-    // {
-    //     // renderer.render();
-    // }
+    game_shutdown(ctx);
 
     return 0;
 }
