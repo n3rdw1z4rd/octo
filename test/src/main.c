@@ -2,16 +2,8 @@
 
 int main(int argc, char **argv)
 {
-    LOG_FATAL("FATAL");
-    LOG_ERROR("ERROR");
-    LOG_WARN("WARN");
-    LOG_INFO("INFO");
-    LOG_DEBUG("DEBUG");
-    LOG_TRACE("TRACE");
-
-#ifdef OCTO_DEBUG
-    LOG_DEBUG("OCTO_DEBUG");
-#endif
+    LOG_INFO("*** OCTO TEST ***");
+    LOG_DEBUG("DEBUG BUILD");
 
     // LogMessage(LOG_LEVEL_FATAL, "octotest: LogFatal");
 
