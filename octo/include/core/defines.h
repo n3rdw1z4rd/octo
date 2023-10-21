@@ -69,6 +69,10 @@ typedef unsigned char bool;
 #endif
 #endif
 
+#include "defines/keyboard_defs.h"
+#include "defines/mouse_defs.h"
+#include "defines/gamepad_defs.h"
+
 #define OCTO_VULKAN_API_VERSION VK_API_VERSION_1_3
 
 #define GLFW_CLIENT_NO_API

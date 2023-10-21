@@ -1,108 +1,138 @@
-#include "../include/core/game.h"
-#include "../include/core/logger.h"
+// #include "../include/core/game.h"
+// #include "../include/core/logger.h"
 
-#include <GLFW/glfw3.h>
-#include <stdlib.h>
+// #include <GLFW/glfw3.h>
+// #include <stdlib.h>
 
-typedef struct _state
-{
-    GLFWwindow *window;
-} _state;
+// #define GAME_DEFAULT_WIDTH 1280
+// #define GAME_DEFAULT_HEIGHT 720
+// #define GAME_DEFAULT_FULLSCREEN 0
+// #define GAME_DEFAULT_PRESSED_THRESHOLD 200
 
-static _state state;
+// typedef struct _state
+// {
+//     GLFWwindow *window;
+//     game_context *context;
 
-GameContext *create_game_context(const char *title)
-{
-    GameContext *ctx = calloc(1, sizeof(GameContext));
-    ctx->title = title;
-    ctx->version = OCTO_VERSION;
-    ctx->width = GAME_DEFAULT_WIDTH;
-    ctx->height = GAME_DEFAULT_HEIGHT;
-    ctx->fullscreen = GAME_DEFAULT_FULLSCREEN;
-    ctx->pressedThreshold = GAME_DEFAULT_PRESSED_THRESHOLD;
+    
+// } _state;
 
-    return ctx;
-}
+// static _state state;
 
-void _keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
-{
-    LOG_DEBUG("_keyCallback: %c was %s", key, action == GLFW_PRESS ? "pressed" : "released");
-}
+// game_context *create_game_context(const char *title)
+// {
+//     game_context *ctx = calloc(1, sizeof(game_context));
+//     ctx->title = title;
+//     ctx->version = OCTO_VERSION;
+//     ctx->width = GAME_DEFAULT_WIDTH;
+//     ctx->height = GAME_DEFAULT_HEIGHT;
+//     ctx->fullscreen = GAME_DEFAULT_FULLSCREEN;
+//     ctx->pressedThreshold = GAME_DEFAULT_PRESSED_THRESHOLD;
+//     ctx->is_running = false;
+//     ctx->is_paused = false;
 
-void _mouseButtonCallback(GLFWwindow *window, int button, int action, int mods)
-{
-    LOG_DEBUG("_mouseButtonCallback: %c was %s", button, action == GLFW_PRESS ? "pressed" : "released");
-}
+//     return ctx;
+// }
 
-void _mouseWheelCallback(GLFWwindow *window, double xoffset, double yoffset)
-{
-    LOG_DEBUG("_mouseWheelCallback: x: %i, y: %i", xoffset, yoffset);
-}
+// void emit_event(event_type event_type, void *data)
+// {
+//     // if (state.handler != NULL)
+//     // {
+//     //     state.handler(state.context, event_type, NULL);
+//     // }
 
-void _mousePositionCallback(GLFWwindow *window, double xpos, double ypos)
-{
-    LOG_DEBUG("_mousePositionCallback: x: %i, y: %i", xpos, ypos);
-}
+//     if (state.context->event_handler != NULL)
+//     {
+//         state.context->event_handler(state.context, event_type, NULL);
+//     }
+// }
 
-void _resizeCallback(GLFWwindow *window, int width, int height)
-{
-    LOG_DEBUG("_resizeCallback: width: %i, height: %i", width, height);
-}
+// void _keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
+// {
+//     // int *data = (int *)malloc(sizeof(int));
+//     // *data = key;
 
-bool game_init(GameContext *ctx)
-{
-    LOG_DEBUG("GameContext:");
-    LOG_DEBUG("- title: %s", ctx->title);
-    LOG_DEBUG("- version: %s", ctx->version);
-    LOG_DEBUG("- width: %i", ctx->width);
-    LOG_DEBUG("- height: %i", ctx->height);
-    LOG_DEBUG("- fullscreen: %s", ctx->fullscreen ? "true" : "false");
-    LOG_DEBUG("- pressedThreshold: %i", ctx->pressedThreshold);
+//     emit_event(action == GLFW_PRESS ? EVENT_TYPE_KEY_PRESSED : EVENT_TYPE_KEY_RELEASED, &key);//data);
+// }
 
-    LOG_INFO("game_init: initializing window...");
+// void _mouseButtonCallback(GLFWwindow *window, int button, int action, int mods)
+// {
+//     LOG_DEBUG("_mouseButtonCallback: %c was %s", button, action == GLFW_PRESS ? "pressed" : "released");
+// }
 
-    if (glfwInit() == GLFW_FALSE)
-    {
-        LOG_FATAL("game_init: failed to initialize window");
-        return false;
-    }
+// void _mouseWheelCallback(GLFWwindow *window, double xoffset, double yoffset)
+// {
+//     LOG_DEBUG("_mouseWheelCallback: x: %i, y: %i", xoffset, yoffset);
+// }
 
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+// void _mousePositionCallback(GLFWwindow *window, double xpos, double ypos)
+// {
+//     // LOG_DEBUG("_mousePositionCallback: x: %i, y: %i", xpos, ypos);
+// }
 
-    state.window = glfwCreateWindow(
-        ctx->width,
-        ctx->height,
-        ctx->title,
-        NULL, NULL);
+// void _resizeCallback(GLFWwindow *window, int width, int height)
+// {
+//     LOG_DEBUG("_resizeCallback: width: %i, height: %i", width, height);
+// }
 
-    if (!state.window)
-    {
-        LOG_FATAL("game_init: failed to create window");
-        return false;
-    }
+// bool game_init(game_context *ctx)//, event_handler handler)
+// {
+//     LOG_DEBUG("game_context:");
+//     LOG_DEBUG("- title: %s", ctx->title);
+//     LOG_DEBUG("- version: %s", ctx->version);
+//     LOG_DEBUG("- width: %i", ctx->width);
+//     LOG_DEBUG("- height: %i", ctx->height);
+//     LOG_DEBUG("- fullscreen: %s", ctx->fullscreen ? "true" : "false");
+//     LOG_DEBUG("- pressedThreshold: %i", ctx->pressedThreshold);
 
-    glfwSetKeyCallback(state.window, &_keyCallback);
-    glfwSetMouseButtonCallback(state.window, &_mouseButtonCallback);
-    glfwSetScrollCallback(state.window, &_mouseWheelCallback);
-    glfwSetCursorPosCallback(state.window, &_mousePositionCallback);
-    glfwSetFramebufferSizeCallback(state.window, &_resizeCallback);
+//     LOG_INFO("game_init: initializing window...");
 
-    return true;
-}
+//     if (glfwInit() == GLFW_FALSE)
+//     {
+//         LOG_FATAL("game_init: failed to initialize window");
+//         return false;
+//     }
 
-void game_poll_events()
-{
-    glfwPollEvents();
+//     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
-    if (glfwWindowShouldClose(state.window))
-    {
-        LOG_DEBUG("game_poll_events: window should close");
-    }
-}
+//     state.window = glfwCreateWindow(
+//         ctx->width,
+//         ctx->height,
+//         ctx->title,
+//         NULL, NULL);
 
-void game_shutdown(GameContext *ctx)
-{
-    glfwDestroyWindow(state.window);
-    glfwTerminate();
-    free(ctx);
-}
+//     if (!state.window)
+//     {
+//         LOG_FATAL("game_init: failed to create window");
+//         return false;
+//     }
+
+//     glfwSetKeyCallback(state.window, &_keyCallback);
+//     glfwSetMouseButtonCallback(state.window, &_mouseButtonCallback);
+//     glfwSetScrollCallback(state.window, &_mouseWheelCallback);
+//     glfwSetCursorPosCallback(state.window, &_mousePositionCallback);
+//     glfwSetFramebufferSizeCallback(state.window, &_resizeCallback);
+
+//     ctx->is_running = true;
+//     state.context = ctx;
+//     // state.handler = handler;
+
+//     return true;
+// }
+
+// void game_poll_events()
+// {
+//     glfwPollEvents();
+
+//     if (glfwWindowShouldClose(state.window))
+//     {
+//         emit_event(EVENT_TYPE_SHUTDOWN, NULL);
+//     }
+// }
+
+// void game_shutdown(game_context *ctx)
+// {
+//     glfwDestroyWindow(state.window);
+//     glfwTerminate();
+//     free(ctx);
+// }

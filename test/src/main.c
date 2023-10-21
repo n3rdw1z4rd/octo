@@ -1,40 +1,47 @@
 #include <octo.h>
 
+// bool _on_game_event(game_context *context, event_type type, void *data)
+// {
+//     switch (type)
+//     {
+//     case EVENT_TYPE_SHUTDOWN:
+//         context->is_running = false;
+//         break;
+//     case EVENT_TYPE_KEY_RELEASED:
+//         LOG_DEBUG("- key released: %i", data);
+//         break;
+//     default:
+//         break;
+//     }
+
+//     return false;
+// }
+
 int main(int argc, char **argv)
 {
     LOG_INFO("*** OCTO TEST ***");
 
-    GameContext *ctx = create_game_context("octo | test");
+    window *window = create_window("octo - test", 1280, 720);
 
-    if (game_init(ctx))
+    if (window != NULL)
     {
-        while (true)
+        while (!window->should_close)
         {
-            game_poll_events();
+            poll_window_events();
+
+            // mouse_position mpos = get_mouse_postion();
+            // LOG_DEBUG("mpos: %ix%i", mpos.x, mpos.y);
+
+            if (is_key_down(GLFW_KEY_ESCAPE))
+            {
+                break;
+            }
         }
 
-        // Window window{&ctx};
-        // Renderer renderer{&ctx};
+        destroy_window();
 
-        // LogDebug("octotest: setting up event listeners");
-
-        // window.onWindowResized([&](int width, int height)
-        //                        { renderer.resize(width, height); });
-
-        // window.onKeyPressed(GLFW_KEY_ESCAPE, [&](int mods)
-        //                     {
-        //     LogDebug("octotest: onKeyPress: GLFW_KEY_ESCAPE");
-        //     window.shutdown(); });
-
-        // LogDebug("octotest: starting main loop");
-
-        // while (window.pollEvents())
-        // {
-        //     // renderer.render();
-        // }
+        return 0;
     }
 
-    game_shutdown(ctx);
-
-    return 0;
+    return -1;
 }
