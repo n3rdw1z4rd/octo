@@ -4,42 +4,36 @@
 #include "context.hpp"
 
 #include <GLFW/glfw3.h>
-
 #include <string>
 #include <memory>
 #include <functional>
 #include <list>
 #include <map>
 
-namespace octo
-{
-    struct MousePosition
-    {
+namespace octo {
+    struct MousePosition {
         int x;
         int y;
     };
 
-    struct KeyboardState
-    {
-        bool keyDown[GLFW_KEY_LAST + 1] = {false};
-        long long keyDownTime[GLFW_KEY_LAST + 1] = {0};
+    struct KeyboardState {
+        bool keyDown[GLFW_KEY_LAST + 1] = { false };
+        long long keyDownTime[GLFW_KEY_LAST + 1] = { 0 };
         int mods;
     };
 
-    struct MouseState
-    {
-        bool buttonDown[GLFW_MOUSE_BUTTON_LAST + 1] = {false};
-        long long buttonDownTime[GLFW_MOUSE_BUTTON_LAST + 1] = {0};
+    struct MouseState {
+        bool buttonDown[GLFW_MOUSE_BUTTON_LAST + 1] = { false };
+        long long buttonDownTime[GLFW_MOUSE_BUTTON_LAST + 1] = { 0 };
         int mods;
         int wheel;
         MousePosition position;
         MousePosition positionDelta;
     };
 
-    class Window
-    {
+    class Window {
     public:
-        Window(Context *);
+        Window(Context*);
         ~Window();
 
         void cleanup();
@@ -59,13 +53,13 @@ namespace octo
         void onWindowResized(std::function<void(int width, int height)> callback);
 
     private:
-        static void _keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
-        static void _mouseButtonCallback(GLFWwindow *window, int button, int action, int mods);
-        static void _mouseWheelCallback(GLFWwindow *window, double xoffset, double yoffset);
-        static void _mousePositionCallback(GLFWwindow *window, double xpos, double ypos);
-        static void _resizeCallback(GLFWwindow *window, int width, int height);
+        static void _keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+        static void _mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+        static void _mouseWheelCallback(GLFWwindow* window, double xoffset, double yoffset);
+        static void _mousePositionCallback(GLFWwindow* window, double xpos, double ypos);
+        static void _resizeCallback(GLFWwindow* window, int width, int height);
 
-        Context *_context;
+        Context* _context;
 
         KeyboardState _keyboardState;
         std::list<std::function<void(int key, int scancode, int action, int mods)>> _keyboardEventListeners;
