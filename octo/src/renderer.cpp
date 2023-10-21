@@ -5,7 +5,6 @@
 #include "../include/third_party/tiny_obj_loader.h"
 #include "../include/third_party/stb_image.h"
 
-#
 #include <set>
 #include <chrono>
 #include <algorithm>
@@ -254,10 +253,10 @@ namespace octo
         VkApplicationInfo appInfo{};
         appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
         appInfo.pApplicationName = context->name.c_str();
-        appInfo.applicationVersion = VK_MAKE_VERSION(VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
+        appInfo.applicationVersion = VK_MAKE_API_VERSION(OCTO_VULKAN_API_VARIANT, OCTO_VERSION_MAJOR, OCTO_VERSION_MINOR, OCTO_VERSION_PATCH);
         appInfo.pEngineName = ENGINE_NAME;
-        appInfo.engineVersion = VK_MAKE_VERSION(VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH);
-        appInfo.apiVersion = VK_API_VERSION_1_2;
+        appInfo.engineVersion = VK_MAKE_API_VERSION(OCTO_VULKAN_API_VARIANT, OCTO_VERSION_MAJOR, OCTO_VERSION_MINOR, OCTO_VERSION_PATCH);
+        appInfo.apiVersion = OCTO_VULKAN_API_VERSION;
 
         VkInstanceCreateInfo createInfo{};
         createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
@@ -829,10 +828,12 @@ namespace octo
 
     void Renderer::createTextureImage()
     {
-        LogDebug("Renderer::createTextureImage");
+        std::string texturePath = (OCTO_ASSETS_PATH + TEXTURE_PATH);
+
+        LogDebug("Renderer::createTextureImage: texture:", texturePath);
 
         int texWidth, texHeight, texChannels;
-        stbi_uc *pixels = stbi_load(TEXTURE_PATH.c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
+        stbi_uc *pixels = stbi_load(texturePath.c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
         VkDeviceSize imageSize = texWidth * texHeight * 4;
         mipLevels = static_cast<uint32_t>(std::floor(std::log2(std::max(texWidth, texHeight)))) + 1;
 
@@ -1177,14 +1178,15 @@ namespace octo
 
     void Renderer::loadModel()
     {
-        LogDebug("Renderer::loadModel");
+        std::string modelPath = (OCTO_ASSETS_PATH + MODEL_PATH);
+        LogDebug("Renderer::loadModel: model:", modelPath);
 
         tinyobj::attrib_t attrib;
         std::vector<tinyobj::shape_t> shapes;
         std::vector<tinyobj::material_t> materials;
         std::string warn, err;
 
-        if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, MODEL_PATH.c_str()))
+        if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, modelPath.c_str()))
         {
             throw std::runtime_error("Renderer::loadModel: " + warn + err);
         }

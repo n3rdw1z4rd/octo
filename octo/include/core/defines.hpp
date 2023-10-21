@@ -7,7 +7,6 @@
 static bool win_console_initialized = false;
 #endif
 
-// #define GLFW_CLIENT_NO_API
 #define GLFW_INCLUDE_VULKAN
 
 #define GLM_FORCE_RADIANS

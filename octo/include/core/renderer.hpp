@@ -5,13 +5,14 @@
 #include "context.hpp"
 #include "vertex.hpp"
 
-#include <GLFW/glfw3.h>
-
 #include <glm/gtx/hash.hpp>
 
 #include <string>
 #include <vector>
 #include <optional>
+
+#define OCTO_VULKAN_API_VARIANT 0
+#define OCTO_VULKAN_API_VERSION VK_API_VERSION_1_3
 
 namespace std {
     template<> struct hash<octo::Vertex> {
@@ -22,8 +23,9 @@ namespace std {
 }
 
 namespace octo {
-    const std::string MODEL_PATH = "assets/viking_room.obj";
-    const std::string TEXTURE_PATH = "assets/viking_room.png";
+    const std::string OCTO_ASSETS_PATH = ASSETS_PATH;
+    const std::string MODEL_PATH = "viking_room.obj";
+    const std::string TEXTURE_PATH = "viking_room.png";
 
     const int MAX_FRAMES_IN_FLIGHT = 2;
 

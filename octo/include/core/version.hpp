@@ -3,6 +3,22 @@
 #define TO_STR(x) #x
 #define STR(x) TO_STR(x)
 
+#ifndef PRODUCT_NAME
+#define PRODUCT_NAME "octo"
+#endif
+
+#ifndef VERSION_MAJOR
+#define VERSION_MAJOR 0
+#endif
+
+#ifndef VERSION_MINOR
+#define VERSION_MINOR 0
+#endif
+
+#ifndef VERSION_PATCH
+#define VERSION_PATCH 0
+#endif
+
 #define ENGINE_NAME PRODUCT_NAME
 
 #define OCTO_VERSION_MAJOR VERSION_MAJOR

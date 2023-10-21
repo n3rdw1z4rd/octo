@@ -2,6 +2,7 @@
 
 #include "defines.hpp"
 
+#include <vulkan/vulkan.hpp>
 #include <glm/glm.hpp>
 
 #include <array>
